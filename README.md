@@ -23,8 +23,10 @@ sudo apt install libpq-dev
 
 La solución puede depender del paquete libpq5, por tanto, si el error es el siguiente: 
  "libpq-dev : Depende: libpq5 (= 12.11-0ubuntu0.20.04.1) pero 14.3-1.pgdg20.04+1 está instalado"
+ 
 Se soluciona con (esto por fuera del virtualenv): 
 
 sudo apt-get install libpq5=12.11-0ubuntu0.20.04.1
+
 sudo apt-get install libpq-dev 
 

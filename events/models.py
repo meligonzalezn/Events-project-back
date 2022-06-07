@@ -50,7 +50,7 @@ class News(models.Model):
     Summary = models.CharField(max_length=255)
     State = models.CharField(max_length=20)
     # El campo para subir las imágenes o videos
-    Media_file = models.ImageField(upload_to='images_videos_news/')
+    Media_file = models.FileField(upload_to='images_videos_news/')
     Edition_date = models.DateField()
 
 

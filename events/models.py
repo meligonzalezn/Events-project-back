@@ -1,5 +1,4 @@
 from django.db import models
-
 # Create your models here.
 
 class User(models.Model):
@@ -16,7 +15,7 @@ class Event(models.Model):
     Details = models.CharField(max_length=50)
     State = models.CharField(max_length=20)
     Space = models.CharField(max_length=20)
-    Media_file = models.ImageField(upload_to='images_videos')
+    Media_file = models.ImageField(upload_to='images_events/')
     Date = models.DateField()
     Init_hour = models.TimeField()
     Final_hour = models.TimeField()
@@ -48,7 +47,7 @@ class News(models.Model):
     Summary = models.CharField(max_length=255)
     State = models.CharField(max_length=20)
     #El campo para subir las imágenes o videos
-    Media_file = models.FileField(upload_to='images_videos')
+    Media_file = models.ImageField(upload_to='images_videos_news/')
     Edition_date = models.DateField()
 
 class event_payments(models.Model):

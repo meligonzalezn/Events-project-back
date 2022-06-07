@@ -1,7 +1,7 @@
 from urllib.request import Request
 from django.shortcuts import get_object_or_404
 from rest_framework import viewsets
-from .serializer import ActividadSerializer, EventSerializer, NoticiaSerializer, UserSerializer
+from .serializer import ActivitySerializer, EventSerializer, NewsSerializer, UserSerializer
 from .models import User, Event, Activity, Payment, News
 from rest_framework.decorators import action
 from rest_framework.response import Response
@@ -29,7 +29,7 @@ class UserViewSet(viewsets.ModelViewSet):
 
     @action(detail=True, methods=['put'], url_path='update')
     def actualizar(this, request, pk):
-        try:
+        # try:
             user = User.objects.get(id=pk)
             
             if('Name' in request.data):
@@ -46,9 +46,9 @@ class UserViewSet(viewsets.ModelViewSet):
                 user.Password = request.data['Password']
             user.save()
 
-            return Response("User " + pk + " updated", status=status.HTTP_200_OK)
-        except:
-            return Response("Error", status.HTTP_500_INTERNAL_SERVER_ERROR)
+            return Response("User " + user.Name + " updated", status=status.HTTP_200_OK)
+        # except:
+        #     return Response("Error", status.HTTP_500_INTERNAL_SERVER_ERROR)
 
     # @action(detail=True, methods={'post'})
     # def gl():
@@ -59,20 +59,20 @@ class UserViewSet(viewsets.ModelViewSet):
             user.State = not user.State
             user.save()
             
-            return Response("User" + user.Name + "updated", status=status.HTTP_200_OK)
+            return Response("User " + user.Name + " updated", status=status.HTTP_200_OK)
         # except:
         #     return Response("Error", status.HTTP_400_BAD_REQUEST)
 
 class EventViewSet(viewsets.ModelViewSet):
     serializer_class = EventSerializer
-    queryset = Evento.objects.all()
+    queryset = Event.objects.all()
 
 
-class ActividadViewSet(viewsets.ModelViewSet):
-    serializer_class = ActividadSerializer
-    queryset = Actividad.objects.all()
+class ActivityViewSet(viewsets.ModelViewSet):
+    serializer_class = ActivitySerializer
+    queryset = Activity.objects.all()
 
 
-class NoticiaViewSet(viewsets.ModelViewSet):
-    serializer_class = NoticiaSerializer
-    queryset = Noticia.objects.all()
+class NewsViewSet(viewsets.ModelViewSet):
+    serializer_class = NewsSerializer
+    queryset = News.objects.all()

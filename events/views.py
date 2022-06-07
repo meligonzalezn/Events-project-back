@@ -2,7 +2,7 @@ from urllib.request import Request
 from django.shortcuts import get_object_or_404
 from rest_framework import viewsets
 from .serializer import ActividadSerializer, EventSerializer, NoticiaSerializer, UserSerializer
-from .models import Usuario, Evento, Usuario, Actividad, Pago, Noticia
+from .models import User, Event, Activity, Payment, News
 from rest_framework.decorators import action
 from rest_framework.response import Response
 from rest_framework import status
@@ -10,9 +10,9 @@ from rest_framework import status
 
 class UserViewSet(viewsets.ModelViewSet):
 
-    model = Usuario
+    model = User
     serializer_class = UserSerializer
-    queryset = Usuario.objects.all()
+    queryset = User.objects.all()
 
     http_method_names = ['get', 'post', 'put']
 
@@ -21,7 +21,7 @@ class UserViewSet(viewsets.ModelViewSet):
     ## 
     def get_user(self: object, request: Request, pk: int):
         try:
-            query = Usuario.objects.all().get(pk=pk)
+            query = User.objects.all().get(pk=pk)
             serializer: UserSerializer = self.serializer_class(query, many=False)
             return Response(serializer.data, status=status.HTTP_200_OK)
         except:
@@ -30,20 +30,20 @@ class UserViewSet(viewsets.ModelViewSet):
     @action(detail=True, methods=['put'], url_path='update')
     def actualizar(this, request, pk):
         try:
-            user = Usuario.objects.get(id=pk)
+            user = User.objects.get(id=pk)
             
-            if('Nombre' in request.data):
-                user.Nombre = request.data['Nombre']
-            if('Estado' in request.data):
-                user.Estado = request.data['Estado']
-            if('Rol' in request.data):
-                user.Rol = request.data['Rol'] 
-            if('Correo' in request.data):
-                user.Correo = request.data['Correo']
-            if('Telefono' in request.data):
-                user.Telefono = request.data['Telefono']
-            if('Contraseña' in request.data):
-                user.Contraseña = request.data['Contraseña']
+            if('Name' in request.data):
+                user.Name = request.data['Name']
+            if('State' in request.data):
+                user.State = request.data['State']
+            if('Role' in request.data):
+                user.Role = request.data['Role'] 
+            if('Email' in request.data):
+                user.Email = request.data['Email']
+            if('Phone' in request.data):
+                user.Phone = request.data['Phone']
+            if('Password' in request.data):
+                user.Password = request.data['Password']
             user.save()
 
             return Response("User " + pk + " updated", status=status.HTTP_200_OK)
@@ -52,14 +52,14 @@ class UserViewSet(viewsets.ModelViewSet):
 
     # @action(detail=True, methods={'post'})
     # def gl():
-    @action(detail=True, methods=['get'], url_path='habilitar')
-    def habilitar(this, _, pk):
+    @action(detail=True, methods=['get'], url_path='enable')
+    def enable(this, _, pk):
         # try:
-            user = Usuario.objects.get(id=pk)
-            user.Estado = not user.Estado
+            user = User.objects.get(id=pk)
+            user.State = not user.State
             user.save()
             
-            return Response("Usuario" + user.Nombre + "Actualizado", status=status.HTTP_200_OK)
+            return Response("User" + user.Name + "updated", status=status.HTTP_200_OK)
         # except:
         #     return Response("Error", status.HTTP_400_BAD_REQUEST)
 

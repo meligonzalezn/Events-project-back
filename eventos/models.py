@@ -4,11 +4,10 @@ from django.db import models
 
 
 class Usuario(models.Model):
-    Correo = models.BigAutoField(primary_key=True)
     Nombre = models.CharField(max_length=120)
     Estado = models.BooleanField(default=True)
     Rol = models.CharField(max_length=50)
-    Correo = models.CharField(max_length=100)
+    Correo = models.CharField(max_length=100, unique=True)
     Telefono = models.CharField(max_length=16, default='')
     Contraseña = models.CharField(max_length=255)
 

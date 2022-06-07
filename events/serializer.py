@@ -1,27 +1,23 @@
 from rest_framework import serializers
-from .models import Actividad, Evento, Noticia, Usuario
+from .models import User, Event, Activity, News
 
-
-HABILITADO: bool = True
-INHABILITADO: bool = False
 
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Usuario
-        fields = ['id', 'Estado', 'Correo', 'Nombre', 'Rol', 'Telefono', 'Contraseña']
+        model = User
+        fields = ['id', 'Name', 'Phone', 'Email', 'Role', 'State', 'Password']
 
 class EventSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Evento
-        fields = ['id', 'Titulo', 'Detalles', 'Estado', 'Espacio', 'Media_file', 'Fecha', 'Hora_inicio', 'Hora_finalizacion']
+    class Meta: 
+        model = Event
+        fields = ['Title', 'Details', 'State', 'Space', 'Media_file', 'Date', 'Init_hour', 'Final_hour']
 
-class ActividadSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Actividad
-        fields = ['Fecha', 'Hora_inicio', 'Hora_finalizacion', 'Espacio', 'Estado', 'Detalles', 'Titulo']
+class ActivitySerializer(serializers.ModelSerializer):
+    class Meta: 
+        model = Activity
+        fields= ['Date', 'Init_hour', 'Final_hour', 'Space', 'State', 'Details', 'Title' ]
 
-class NoticiaSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Noticia
-        fields = ['Titulo', 'Descripcion', 'Resumen', 'Estado', 'Media_file', 'Fecha_edicion']
-
+class NewsSerializer(serializers.ModelSerializer):
+    class Meta: 
+        model = News
+        fields = ['Title', 'Description', 'Summary', 'State', 'Media_file', 'Edition_date']

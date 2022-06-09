@@ -14,7 +14,7 @@ class UserViewSet(viewsets.ModelViewSet):
     serializer_class = UserSerializer
     queryset = User.objects.all()
 
-    http_method_names = ['get', 'post', 'put']
+    # http_method_names = ['get', 'post', 'put']
 
     
     @action(detail=True, methods=['get'], url_path='watch')

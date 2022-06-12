@@ -1,7 +1,6 @@
 from rest_framework import serializers
 from .models import User, Event, Activity, News
 
-
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
@@ -20,4 +19,4 @@ class ActivitySerializer(serializers.ModelSerializer):
 class NewsSerializer(serializers.ModelSerializer):
     class Meta: 
         model = News
-        fields = ['Title', 'Description', 'Summary', 'State', 'Media_file', 'Edition_date']
+        fields = ['ID_event', 'ID_user','Title', 'Description', 'Summary', 'State', 'Media_file', 'Edition_date']

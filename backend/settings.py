@@ -13,7 +13,6 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 
 from pathlib import Path
 import os
-
 from django import conf
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -63,6 +62,13 @@ MIDDLEWARE = [
 CORS_ORIGIN_WHITELIST = [
     'http://localhost:3000'
 ]
+
+DEFAULT_PARSER_CLASSES = [
+    'rest_framework.parsers.JSONParser',
+    'rest_framework.parsers.FormParser',
+    'rest_framework.parsers.MultiPartParser',
+]
+
 
 ROOT_URLCONF = 'backend.urls'
 

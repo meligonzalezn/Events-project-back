@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'cloudinary_storage',
     'cloudinary',
     'rest_framework_swagger',
+    'django.contrib.sessions',
 ]
 
 MIDDLEWARE = [

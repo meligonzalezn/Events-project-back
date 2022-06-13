@@ -10,10 +10,10 @@ from rest_framework.schemas import get_schema_view
 router = routers.DefaultRouter()
 
 urlpatterns = [
-    path("users/", include("users.urls")),
-    path("events/", include("events.urls")),
-    path("activities/", include("activities.urls")),
-    path("news/", include("news.urls")),
+    path("User/", include("users.urls")),
+    path("Events/", include("events.urls")),
+    path("Activity/", include("activities.urls")),
+    path("News/", include("news.urls")),
     path('api_schema/', get_schema_view(
         title='API Schema',
         description='Guide for the REST API'

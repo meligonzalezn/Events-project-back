@@ -9,7 +9,8 @@ class UserSerializer(serializers.ModelSerializer):
 class EventSerializer(serializers.ModelSerializer):
     class Meta: 
         model = Event
-        fields = ['Title', 'Details', 'State', 'Space', 'Media_file', 'Date', 'Init_hour', 'Final_hour']
+        ##fields = ['id','Title', 'Details', 'State', 'Space', 'Media_file', 'Start_date', 'Finish_date']
+        fields = ['id','Title', 'Details', 'State', 'Space', 'Cost', 'Start_date', 'Finish_date', 'Media_file']
 
 class ActivitySerializer(serializers.ModelSerializer):
     class Meta: 

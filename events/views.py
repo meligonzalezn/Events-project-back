@@ -64,8 +64,62 @@ class UserViewSet(viewsets.ModelViewSet):
         #     return Response("Error", status.HTTP_400_BAD_REQUEST)
 
 class EventViewSet(viewsets.ModelViewSet):
+    model = Event
     serializer_class = EventSerializer
     queryset = Event.objects.all()
+
+    @action(detail=True, methods=['get'], url_path='bring')
+    def traer(self, request, format=None):
+        
+        serializer = EventSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        # return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        return Response("monda", status=status.HTTP_400_BAD_REQUEST)
+    
+    @action(detail=True, methods=['put'], url_path='update')
+    def actualizar(this, request, pk):
+        # try:
+            event = Event.objects.get(id=pk)
+            
+            if('Title' in request.data):
+                event.Title = request.data['Title']
+
+            event.save()
+
+            return Response("User " + event.Title + " updated", status=status.HTTP_200_OK)
+
+
+    @action(detail=True, methods=['post'], url_path='crea')
+    def crea(this, request):
+        # try:
+            user = User.objects.get(id=pk)
+            
+            if('Name' in request.data):
+                user.Name = request.data['Name']
+            if('State' in request.data):
+                user.State = request.data['State']
+            if('Role' in request.data):
+                user.Role = request.data['Role'] 
+            if('Email' in request.data):
+                user.Email = request.data['Email']
+            if('Phone' in request.data):
+                user.Phone = request.data['Phone']
+            if('Password' in request.data):
+                user.Password = request.data['Password']
+            user.save()
+
+            return Response("User " + user.Name + " updated", status=status.HTTP_200_OK)
+    # @action(detail=True, methods=['get'], url_path='watch')
+    # ## 
+    # def get_events(request: Request):
+    #     try:
+    #         query = Event.objects.all()
+    #         serializer: EventSerializer = self.serializer_class(query, many=False)
+    #         return Response(serializer.data, status=status.HTTP_200_OK)
+    #     except:
+    #         return Response("Events don't exist", status=status.HTTP_400_BAD_REQUEST)
 
 
 class ActivityViewSet(viewsets.ModelViewSet):

@@ -16,14 +16,14 @@ class User(models.Model):
 
 class Event(models.Model):
     Title = models.CharField(max_length=100)
-    Details = models.CharField(max_length=51)
+    Details = models.CharField(max_length=51, blank=True, null=True)
     State = models.CharField(max_length=20)
     Space = models.CharField(max_length=20)
     Cost = models.IntegerField(default=0)
-    Media_file = models.ImageField(upload_to='images_events/')
-    Date = models.DateField()
-    Init_hour = models.TimeField()
-    Final_hour = models.TimeField()
+    ##images_events/
+    Media_file = cloudinary.models.CloudinaryField(folder='media/images_videos_news/', overwrite=True, resource_type='')
+    Start_date = models.DateField()
+    Finish_date = models.DateField()
 
 
 class Activity(models.Model):

@@ -64,9 +64,17 @@ class UserViewSet(viewsets.ModelViewSet):
         #     return Response("Error", status.HTTP_400_BAD_REQUEST)
 
 class EventViewSet(viewsets.ModelViewSet):
+    model = Event
     serializer_class = EventSerializer
     queryset = Event.objects.all()
-
+    @action(detail=True, methods=['get'], url_path='watch')
+    def get_event(self: object, request: Request, Title):
+        try:
+            query = request.query_params(Event, Title=Title)
+            serializer: EventSerializer = self.serializer_class(query, many=False)
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        except:
+            return Response("Event doesn't exist", status=status.HTTP_400_BAD_REQUEST)
 
 class ActivityViewSet(viewsets.ModelViewSet):
     serializer_class = ActivitySerializer

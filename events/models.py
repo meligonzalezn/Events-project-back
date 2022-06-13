@@ -15,7 +15,7 @@ class User(models.Model):
 
 
 class Event(models.Model):
-    Title = models.CharField(max_length=100)
+    Title = models.CharField(max_length=100, unique=True)
     Details = models.CharField(max_length=51)
     State = models.CharField(max_length=20)
     Space = models.CharField(max_length=20)

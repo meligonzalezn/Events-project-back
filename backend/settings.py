@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'users',
     'activities',
     'news',
+    'login',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -49,7 +50,6 @@ INSTALLED_APPS = [
     'cloudinary_storage',
     'cloudinary',
     'rest_framework_swagger',
-    'django.contrib.sessions',
 ]
 
 MIDDLEWARE = [
@@ -61,6 +61,8 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'corsheaders.middleware.CorsMiddleware',
+    'django.middleware.cache.UpdateCacheMiddleware',
+    'django.middleware.cache.FetchFromCacheMiddleware',
 ]
 
 CORS_ORIGIN_WHITELIST = [
@@ -72,7 +74,6 @@ DEFAULT_PARSER_CLASSES = [
     'rest_framework.parsers.FormParser',
     'rest_framework.parsers.MultiPartParser',
 ]
-
 
 ROOT_URLCONF = 'backend.urls'
 
@@ -127,6 +128,14 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
+
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.memcached.PyMemcacheCache',
+        'LOCATION': '127.0.0.1:11211',
+    }
+}
+
 
 
 # Internationalization

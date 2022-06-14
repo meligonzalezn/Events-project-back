@@ -7,3 +7,4 @@ Pillow
 django-rest-swagger
 pyyaml
 uritemplate
+pymemcache

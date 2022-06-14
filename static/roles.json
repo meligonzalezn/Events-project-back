@@ -1,0 +1,6 @@
+{
+  "usuarios":[],
+  "administrador":["user_edit", "user_watch"],
+  "gerente":[],
+  "operador":["user_edit", "user_watch"]
+}

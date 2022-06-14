@@ -8,3 +8,8 @@ class User(models.Model):
     Email = models.CharField(max_length=510)
     Password = models.CharField(max_length=255)
     Phone = models.CharField(max_length=16, default='')
+    
+    def check_password(this, password):
+        if(this.Password == password and this.State is True):
+            return True
+        return False

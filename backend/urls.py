@@ -14,6 +14,7 @@ urlpatterns = [
     path("Events/", include("events.urls")),
     path("Activity/", include("activities.urls")),
     path("News/", include("news.urls")),
+    path("log/", include("login.urls")),
     path('api_schema/', get_schema_view(
         title='API Schema',
         description='Guide for the REST API'

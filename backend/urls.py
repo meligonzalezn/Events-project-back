@@ -3,18 +3,18 @@ from django.conf import settings
 from django.contrib import admin
 from django.urls import path, include
 from rest_framework import routers
-from events import views
 from django.conf.urls.static import static
 from django.views.generic import TemplateView
 from rest_framework.schemas import get_schema_view
 
 router = routers.DefaultRouter()
-router.register(r'User', views.UserViewSet)
-router.register(r'Events', views.EventViewSet)
-router.register(r'Activity', views.ActivityViewSet)
-router.register(r'News', views.NewsViewSet)
 
 urlpatterns = [
+    path("User/", include("users.urls")),
+    path("Events/", include("events.urls")),
+    path("Activity/", include("activities.urls")),
+    path("News/", include("news.urls")),
+    path("log/", include("login.urls")),
     path('api_schema/', get_schema_view(
         title='API Schema',
         description='Guide for the REST API'

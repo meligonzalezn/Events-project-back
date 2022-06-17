@@ -19,7 +19,9 @@ pip install -r requirements.txt
 ## Install memcache on ubuntu
 
 sudo apt update
+
 sudo apt install memcached
+
 sudo systemctl start memcached
 
 ### Possible bugs

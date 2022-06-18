@@ -52,6 +52,10 @@ INSTALLED_APPS = [
     'rest_framework_swagger',
 ]
 
+CORS_ALLOWED_ORIGINS = [
+    'http://localhost:3000',
+]
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -63,8 +67,11 @@ MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.cache.UpdateCacheMiddleware',
     'django.middleware.cache.FetchFromCacheMiddleware',
+    'login.middleware.loggedMiddleware.LoggedMiddleware'
 ]
 
+
+CORS_ALLOW_ALL_ORIGINS = True
 CORS_ORIGIN_WHITELIST = [
     'http://localhost:3000'
 ]
@@ -136,7 +143,7 @@ CACHES = {
     }
 }
 
-
+SESSION_SAVE_EVERY_REQUEST=True 
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.0/topics/i18n/

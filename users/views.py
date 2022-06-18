@@ -32,9 +32,9 @@ class UserViewSet(viewsets.ModelViewSet):
         Check if actual session is valid and has access to required functionalities.\n
         @return [response: Response, is_authentificated: bool]
         """
-        if(not is_logged(request)):
-            return [Response("Not logged.", status=status.HTTP_406_NOT_ACCEPTABLE), False]
-                
+        if(not (request.session['Role'] in role)):
+            return [Response("Rol doesn't exist", status=status.HTTP_400_BAD_REQUEST), False]
+        
         for perm in permissions:
             if(not (perm in role[request.session['Role']])):
                 return [Response("Not authorized", status=status.HTTP_401_UNAUTHORIZED), False]

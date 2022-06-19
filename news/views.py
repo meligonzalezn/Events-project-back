@@ -15,7 +15,6 @@ class NewsViewSet(viewsets.ModelViewSet):
     def update_news(this, request, pk):
         try:
             news = News.objects.get(id=pk)
-            print("Esto que es lo que devuelve: ", news)
             if('ID_event'in request.data):
                 news.ID_event = request.data['ID_event']
             if('ID_user'in request.data):

@@ -52,6 +52,10 @@ INSTALLED_APPS = [
     'rest_framework_swagger',
 ]
 
+CORS_ALLOWED_ORIGINS = [
+    'http://localhost:3000',
+]
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -61,10 +65,12 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'corsheaders.middleware.CorsMiddleware',
-    'django.middleware.cache.UpdateCacheMiddleware',
-    'django.middleware.cache.FetchFromCacheMiddleware',
+    'login.middleware.loggedMiddleware.LoggedMiddleware',
+    'users.middleware.userMiddleware.UserMiddleware'
 ]
 
+
+CORS_ALLOW_ALL_ORIGINS = True
 CORS_ORIGIN_WHITELIST = [
     'http://localhost:3000'
 ]
@@ -135,7 +141,6 @@ CACHES = {
         'LOCATION': '127.0.0.1:11211',
     }
 }
-
 
 
 # Internationalization

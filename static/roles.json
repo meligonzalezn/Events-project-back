@@ -1,6 +1,7 @@
 {
   "usuarios":[],
-  "administrador":["user_edit", "user_watch"],
+  "administrador":["User", "user_watch"],
   "gerente":[],
-  "operador":["user_edit", "user_watch"]
+  "operador":["User", "user_watch"],
+  "any_user": ["login", "loggout"]
 }

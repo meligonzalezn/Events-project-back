@@ -65,9 +65,8 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'corsheaders.middleware.CorsMiddleware',
-    'django.middleware.cache.UpdateCacheMiddleware',
-    'django.middleware.cache.FetchFromCacheMiddleware',
-    'login.middleware.loggedMiddleware.LoggedMiddleware'
+    'login.middleware.loggedMiddleware.LoggedMiddleware',
+    'users.middleware.userMiddleware.UserMiddleware'
 ]
 
 
@@ -143,7 +142,6 @@ CACHES = {
     }
 }
 
-SESSION_SAVE_EVERY_REQUEST=True 
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.0/topics/i18n/

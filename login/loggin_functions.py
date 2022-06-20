@@ -1,10 +1,9 @@
 
 
-from urllib.request import Request
 from django.core.cache import cache
 
 
-def is_logged(request: Request):
+def is_logged() -> bool:
   """
   check if an user is logged.\n
   @return is_logged: bool

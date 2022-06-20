@@ -12,7 +12,7 @@ class LoggedMiddleware:
     def __call__(self, request):
         """df"""
         response = self.get_response(request)
-        if(is_logged(request) or request.path.startswith("/login") or request.path.startswith("/docs") or request.path.startswith("/api_schema/")):
+        if(is_logged() or request.path.startswith("/login") or request.path.startswith("/docs") or request.path.startswith("/api_schema/")):
             return response
         else:
             response = Response(

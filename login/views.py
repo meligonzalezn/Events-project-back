@@ -23,7 +23,7 @@ class LoginViewSet(viewsets.ViewSet):
     @action(detail=False, methods=['get'])
     def get(self, request: Request):
         try:
-            if is_logged(request):
+            if is_logged():
                 return Response("You're logged in. ", status=status.HTTP_200_OK)
             else:
                 return Response("You're not logged", status=status.HTTP_401_UNAUTHORIZED)

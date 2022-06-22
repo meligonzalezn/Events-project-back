@@ -32,7 +32,7 @@ class UserMiddleware:
         except FileNotFoundError:
             response = Response(
                 data='Static File not found',
-                status=status.HTTP_503_SERVICE_UNAVAILABLE
+                status=status.HTTP_500_INTERNAL_SERVER_ERROR
             )
             return self.return_response(response)
         except:

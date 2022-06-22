@@ -22,20 +22,25 @@ class LoginViewSet(viewsets.ViewSet):
     
     @action(detail=False, methods=['get'])
     def get(self, request: Request):
+        """
+            Check if an user is currently logged.\n
+            True if that's it, False otherwise
+        """
         try:
             if is_logged():
                 return Response("You're logged in. ", status=status.HTTP_200_OK)
             else:
                 return Response("You're not logged", status=status.HTTP_401_UNAUTHORIZED)
         except:
-            return Response("Internal server Error", status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+            return Response("Unexpected error", status=status.HTTP_500_INTERNAL_SERVER_ERROR)
             
     
 
     @action(detail=False, methods=['post'])
     def post(self, request: Request):
         """
-        loggin function. HTTP_200 if it is loggin or could logging. otherwise, HTTP_406
+            loggin function. HTTP_200 if it is loggin or could logging.
+            Otherwise, HTTP_406
         """
         if(cache.get('member_id') is not None):
             return Response("You're logged in. ", status=status.HTTP_200_OK)
@@ -56,6 +61,9 @@ class LoginViewSet(viewsets.ViewSet):
             
     @action(detail=False, methods=['delete'])
     def delete(self, request: Request):
+        """
+            Remove cookies information from cache.
+        """
         try:
             cache.delete('member_id')
             cache.delete('Role')
@@ -64,4 +72,4 @@ class LoginViewSet(viewsets.ViewSet):
             cache.set('Role', None)
         except KeyError:
             pass
-        return HttpResponse("You're logged out.")
+        return Response("You're logged out.", status=status.HTTP_200_OK)

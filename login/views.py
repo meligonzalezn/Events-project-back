@@ -72,6 +72,4 @@ class LoginViewSet(viewsets.ViewSet):
             cache.set('Role', None)
         except KeyError:
             pass
-        except:
-            return Response("Unexpected error", status=status.HTTP_200_OK)
         return Response("You're logged out.", status=status.HTTP_200_OK)

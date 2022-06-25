@@ -1,0 +1,7 @@
+{
+  "usuarios":[],
+  "administrador":["User"],
+  "gerente":[],
+  "operador":["User", "user_watch"],
+  "any_user": ["login", "loggout"]
+}

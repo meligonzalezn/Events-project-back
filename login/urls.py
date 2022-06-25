@@ -7,11 +7,15 @@ from .views import LoginViewSet
 
 
 urlpatterns = [
+    path('perms',
+         LoginViewSet.as_view({
+             'post': 'has_access'
+         })),
     path('',
          LoginViewSet.as_view({
              'get': 'get',
              'post': 'post',
              'delete': 'delete'
          })
-        )
+        ),
 ]

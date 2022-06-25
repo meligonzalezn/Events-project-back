@@ -1,16 +1,14 @@
 from django.shortcuts import render
-import os
-from types import MemberDescriptorType
-from typing import List
 from urllib.request import Request
-import django
 from django.http import HttpResponse
 from rest_framework import viewsets
+from .loggin_functions import is_logged
 from users.serializer import UserSerializer
 from rest_framework.decorators import action
 from rest_framework.response import Response
 from rest_framework import status
 from users.models import User
+from django.core.cache import cache
 
 # Create your views here.
 
@@ -19,33 +17,59 @@ class LoginViewSet(viewsets.ViewSet):
     serializer_class = UserSerializer
     queryset = User.objects.all()
 
-    http_method_names = ['post', 'delete']
+    http_method_names = ['get','post', 'delete']
+    
+    
+    @action(detail=False, methods=['get'])
+    def get(self, request: Request):
+        """
+            Check if an user is currently logged.\n
+            True if that's it, False otherwise
+        """
+        try:
+            if is_logged():
+                return Response("You're logged in. ", status=status.HTTP_200_OK)
+            else:
+                return Response("You're not logged", status=status.HTTP_401_UNAUTHORIZED)
+        except:
+            return Response("Unexpected error", status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+            
+    
 
-    @action(detail=False, methods=['post'], url_path='in')
-    def login(self, request: Request):
+    @action(detail=False, methods=['post'])
+    def post(self, request: Request):
         """
-        loggin function. HTTP_200 if it is loggin or could logging. otherwise, HTTP_406
+            loggin function. HTTP_200 if it is loggin or could logging.
+            Otherwise, HTTP_406
         """
-        if(request.session.get('member_id') is not None):
+        if(cache.get('member_id') is not None):
             return Response("You're logged in. ", status=status.HTTP_200_OK)
-        # try:
-        user = self.queryset.get(Email=request.data['Email'])
-        if user.check_password(request.data['Password']):
-            request.session['member_id'] = user.id
-            request.session['Role'] = user.Role
-            return Response("You're logged in.", status=status.HTTP_200_OK)
-        else:
+
+        try:
+            user = self.queryset.get(Email=request.data['Email'])
+            if user.check_password(request.data['Password']):
+                cache.set('member_id', user.id)
+                cache.set('Role', user.Role)
+                return Response("You're logged in.", status=status.HTTP_200_OK)
+            else:
+                return Response("Your username and password didn't match.", status=status.HTTP_406_NOT_ACCEPTABLE)
+        except User.DoesNotExist:
             return Response("Your username and password didn't match.", status=status.HTTP_406_NOT_ACCEPTABLE)
-        # except:
-        #     return Response("Your username and password didn't match.", status=status.HTTP_406_NOT_ACCEPTABLE)
+        except:
+            return Response("Internal server Error", status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
             
-
-    @action(detail=False, methods=['delete'], url_path="out")
-    def loggout(self, request: Request):
+    @action(detail=False, methods=['delete'])
+    def delete(self, request: Request):
+        """
+            Remove cookies information from cache.
+        """
         try:
-            del request.session['member_id']
-            del request.session['Role']
+            cache.delete('member_id')
+            cache.delete('Role')
+            cache.clear()
+            cache.set('member_id', None)
+            cache.set('Role', None)
         except KeyError:
             pass
-        return HttpResponse("You're logged out.")
+        return Response("You're logged out.", status=status.HTTP_200_OK)

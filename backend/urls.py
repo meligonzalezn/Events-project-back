@@ -1,4 +1,5 @@
 from distutils.log import debug
+import os
 from django.conf import settings
 from django.contrib import admin
 from django.urls import path, include
@@ -6,6 +7,7 @@ from rest_framework import routers
 from django.conf.urls.static import static
 from django.views.generic import TemplateView
 from rest_framework.schemas import get_schema_view
+from django.views.generic.base import RedirectView
 
 router = routers.DefaultRouter()
 
@@ -14,7 +16,7 @@ urlpatterns = [
     path("Events/", include("events.urls")),
     path("Activity/", include("activities.urls")),
     path("News/", include("news.urls")),
-    path("log/", include("login.urls")),
+    path("login/", include("login.urls")),
     path('api_schema/', get_schema_view(
         title='API Schema',
         description='Guide for the REST API'

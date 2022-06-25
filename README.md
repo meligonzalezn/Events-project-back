@@ -30,6 +30,16 @@ sudo systemctl start memcached
 
 1. Error: Packages doesn't found. Only is required access to links appear on error message, then download and install .deb package.
 
+## Install memcache on ubuntu
+
+sudo apt update
+sudo apt install memcached
+sudo systemctl start memcached
+
+### Possible bugs
+
+1. Error: Packages doesn't found. Only is required access to links appear on error message, then download and install .deb package.
+
 # Errores en la instalación
 Si instalar psycopg2 da error, solucionar usando el siguiente comando:
 

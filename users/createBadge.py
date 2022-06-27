@@ -3,13 +3,38 @@ import urllib.request
 import numpy as np
 
 
-def loadImage():
-    # ! We need to load a png image.
+def loadImage(userData):
     badgeLoaded = urllib.request.urlopen(
-        'https://res.cloudinary.com/dxx9kwg6t/image/upload/v1655923410/media/badge/5718640_onq5oj.jpg')
+        'https://res.cloudinary.com/dxx9kwg6t/image/upload/v1656183031/media/badge/badge_zopqzd.jpg')
     badgeArray = np.asarray(bytearray(badgeLoaded.read()), dtype=np.uint8)
     badge = cv2.imdecode(badgeArray, cv2.IMREAD_COLOR)
     badge = cv2.resize(badge, (800, 800))
+
+    xName = 90
+    yName = 525
+    cv2.putText(badge, userData['Name'], (xName, yName),
+                cv2.FONT_ITALIC, 0.9, (221, 102, 14), 2)
+
+    xLastName = 90
+    yLastName = 557
+    cv2.putText(badge, userData['Last_name'], (xLastName, yLastName),
+                cv2.FONT_ITALIC, 0.9, (221, 102, 14), 2)
+
+    xID = 150
+    yID = 589
+    cv2.putText(badge, str(userData['id']), (xID, yID),
+                cv2.FONT_HERSHEY_TRIPLEX, 0.4, (0, 0, 0), 1)
+
+    xEmail = 150
+    yEmail = 606
+    cv2.putText(badge, userData['Email'], (xEmail, yEmail),
+                cv2.FONT_HERSHEY_TRIPLEX, 0.4, (0, 0, 0), 1)
+
+    xPhone = 150
+    yPhone = 623
+    cv2.putText(badge, userData['Phone'], (xPhone, yPhone),
+                cv2.FONT_HERSHEY_TRIPLEX, 0.4, (0, 0, 0), 1)
+
     h, w = badge.shape[:2]
     badgePng = np.zeros((h, w, 4), dtype=np.uint8)
     mainX = 117
@@ -57,15 +82,10 @@ def loadImage():
             else:
                 transparentImage[i][j] = (255, 255, 255, 0)
 
-    cv2.imshow('Mask', circularMask)
-    cv2.imshow('Image User', circularUserPhoto)
-    cv2.imshow('Image User PNG', transparentImage)
-    cv2.imshow('Bagde with User PNG', badgePng)
-    while cv2.waitKey(1) != ord('q'):
-        x = 12
-    cv2.destroyAllWindows()
+    # cv2.imshow('Bagde with User PNG', badgePng)
+    # while cv2.waitKey(1) != ord('q'):
+    #     x = 12
+    # cv2.destroyAllWindows()
+    # return badgePng
 
-    cv2.imwrite('circularImage.png', transparentImage)
-
-
-loadImage()
+    cv2.imwrite('badge.png', badgePng)

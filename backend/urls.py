@@ -23,8 +23,8 @@ urlpatterns = [
     ), name='api_schema'),
     path('docs/', TemplateView.as_view(
         template_name='docs.html',
-        extra_context={'schema_url':'api_schema'}
-        ), name='swagger-ui'),
+        extra_context={'schema_url': 'api_schema'}
+    ), name='swagger-ui'),
     path('admin/', admin.site.urls),
     path('', include(router.urls)),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

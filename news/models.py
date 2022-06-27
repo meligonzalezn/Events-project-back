@@ -16,3 +16,4 @@ class News(models.Model):
     Media_file = cloudinary.models.CloudinaryField(
         folder='media/images_videos_news/', overwrite=True, resource_type='')
     Edition_date = models.DateField()
+    Finish_date = models.DateField()

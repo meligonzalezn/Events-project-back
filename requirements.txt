@@ -8,5 +8,5 @@ django-rest-swagger
 pyyaml
 uritemplate
 pymemcache
-python-opencv
+opencv-python
 numpy

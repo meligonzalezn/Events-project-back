@@ -15,7 +15,8 @@
     "loggout",
     "SignUp",
     "Escarapela",
-    "Noticias"
+    "Noticias",
+    "Pago"
   ],
   "exact_url": [
     "/"

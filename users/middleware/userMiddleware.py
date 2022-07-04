@@ -7,8 +7,8 @@ import json
 import os
 
 
-class UserMiddleware:
-
+class UserMiddleware(object):
+    
     def return_response(self, response: Response) -> Response:
         """
             Function that should render middleware response.
@@ -26,7 +26,7 @@ class UserMiddleware:
         """
         self.get_response = get_response
         try:
-            filepath = os.path.join('static', 'roles.json')
+            filepath = os.path.join('static', 'back_url_by_role.json')
             filename = open(filepath, 'r')
             self.role: dict = json.loads(filename.read())
         except FileNotFoundError:

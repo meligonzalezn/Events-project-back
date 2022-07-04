@@ -31,6 +31,8 @@ class NewsViewSet(viewsets.ModelViewSet):
                 news.Media_file = request.data['Media_file']
             if('Edition_date' in request.data):
                 news.Edition_date = request.data['Edition_date']
+            if('Finish_date' in request.data):
+                news.Finish_date = request.data['Finish_date']
             news.save()
 
             return Response("News " + news.Title + " updated", status=status.HTTP_200_OK)

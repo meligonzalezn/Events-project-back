@@ -9,6 +9,7 @@ from rest_framework.response import Response
 from rest_framework import status
 from users.models import User
 from django.core.cache import cache
+from users.user_functions import UserFunctions
 
 # Create your views here.
 
@@ -33,7 +34,18 @@ class LoginViewSet(viewsets.ViewSet):
                 return Response("You're not logged", status=status.HTTP_401_UNAUTHORIZED)
         except:
             return Response("Unexpected error", status=status.HTTP_500_INTERNAL_SERVER_ERROR)
-            
+    
+    @action(detail=False, methods=['post'])
+    def has_access(self, request: Request) -> Response:
+        """
+            Check if an user has permissions to access to a functionality.
+        """
+        # return Response("Siempre es true", status=status.HTTP_200_OK)
+        userFunctions = UserFunctions
+        userFunctions.__init__(userFunctions)
+        return UserFunctions.has_perms(userFunctions, request)
+        
+        
     
 
     @action(detail=False, methods=['post'])

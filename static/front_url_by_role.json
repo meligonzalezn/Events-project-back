@@ -1,0 +1,23 @@
+{
+  "usuarios": [],
+  "administrador": [
+    "Escarapela",
+    "Noticias",
+    "Eventos"
+  ],
+  "gerente": [],
+  "operador": [
+    "User",
+    "user_watch"
+  ],
+  "any_user": [
+    "login",
+    "loggout",
+    "SignUp",
+    "Escarapela",
+    "Noticias"
+  ],
+  "exact_url": [
+    "/"
+  ]
+}

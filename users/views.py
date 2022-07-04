@@ -5,6 +5,8 @@ from rest_framework.decorators import action
 from rest_framework.response import Response
 from rest_framework import status
 from users.models import User
+from .createBadge import loadImage
+from cloudinary.uploader import upload
 
 
 class UserViewSet(viewsets.ModelViewSet):
@@ -72,3 +74,25 @@ class UserViewSet(viewsets.ModelViewSet):
             return Response("Error", status.HTTP_404_NOT_FOUND)
         except:
             return Response("Unexpected error", status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+    @action(detail=True, methods=['get'])
+    def get_badge(this, request: Request, pk: int) -> Response:
+        """
+          For user with id=pk generate his/her own custom badge.
+        """
+
+        try:
+            query = User.objects.get(id=pk)
+            serializer: UserSerializer = UserViewSet.serializer_class(
+                query, many=False)
+
+            userData = serializer.data
+            loadImage(userData)
+            resp = upload("badge.png", public_id="badge_" +
+                          str(pk), folder="media/badges_users/")
+            mediaFile = resp['url']
+
+            response = {"url": mediaFile}
+            return Response(response, status=status.HTTP_200_OK)
+        except:
+            return Response("User doesn't exist", status=status.HTTP_400_BAD_REQUEST)

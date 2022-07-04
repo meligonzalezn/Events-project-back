@@ -1,7 +1,18 @@
 {
-  "usuarios":[],
-  "administrador":["User"],
-  "gerente":[],
-  "operador":["User", "user_watch"],
-  "any_user": ["login", "loggout"]
+  "usuarios": [
+    "News"
+  ],
+  "administrador": [
+    "User",
+    "News"
+  ],
+  "gerente": [],
+  "operador": [
+    "User",
+    "user_watch"
+  ],
+  "any_user": [
+    "login",
+    "loggout"
+  ]
 }

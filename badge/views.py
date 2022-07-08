@@ -1,3 +1,9 @@
-from django.shortcuts import render
+from rest_framework import viewsets
+from .serializer import BadgeSerializer
+from .models import Badge
 
-# Create your views here.
+
+class BadgeViewSet(viewsets.ModelViewSet):
+    model = Badge
+    serializer_class = BadgeSerializer
+    queryset = Badge.objects.all()

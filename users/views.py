@@ -1,3 +1,4 @@
+import json
 from urllib.request import Request
 from rest_framework import viewsets
 from .serializer import UserSerializer
@@ -75,10 +76,10 @@ class UserViewSet(viewsets.ModelViewSet):
         except:
             return Response("Unexpected error", status.HTTP_500_INTERNAL_SERVER_ERROR)
 
-    @action(detail=True, methods=['get'])
+    @action(detail=True, methods=['post'])
     def get_badge(this, request: Request, pk: int) -> Response:
         """
-          For user with id=pk generate his/her own custom badge.
+          For user with ID_User=userId and ID_Event=eventId generate his/her own custom badge.
         """
 
         try:
@@ -87,12 +88,14 @@ class UserViewSet(viewsets.ModelViewSet):
                 query, many=False)
 
             userData = serializer.data
-            loadImage(userData)
-            resp = upload("badge.png", public_id="badge_" +
-                          str(pk), folder="media/badges_users/")
-            mediaFile = resp['url']
+            ID_Event = json.loads(request.body)["ID_Event"]
+            # loadImage(userData)
+            # resp = upload("badge.png", public_id="badge_user(" +
+            #               str(pk) + ")_event(" + str(pk) + ")", folder="media/badges_users/")
+            # mediaFile = resp['url']
 
-            response = {"url": mediaFile}
+            # response = {"url": mediaFile}
+            response = {"url": "something"}
             return Response(response, status=status.HTTP_200_OK)
         except:
             return Response("User doesn't exist", status=status.HTTP_400_BAD_REQUEST)

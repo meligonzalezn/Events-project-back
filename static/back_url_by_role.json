@@ -4,7 +4,8 @@
   ],
   "administrador": [
     "User",
-    "News"
+    "News", 
+    "Events"
   ],
   "gerente": [],
   "operador": [

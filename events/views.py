@@ -18,14 +18,29 @@ class PaymentViewSet(viewsets.ModelViewSet):
     queryset = Payment.objects.all()
 
     http_method_names = ['get', 'post']
+    
+    @action(detail=True, methods=['get'], url_path='enroll_user2event')
+    def enroll_user2event(self, request: Request, pk: int):
+        try:
+            userId = cache.get('member_id')
+            user = User.objects.get(id=userId)
+            event = Event.objects.get(id=pk)
+            new_payment = Payment.objects.create(ID_User=user, ID_Event=event, Date=Date.today(), Value=0, pay_method='')
+            return HTTP_ERRORS.SuccessfulPetition("enrollment petition finished. Payment_ID" + str(new_payment.id))
+        except KeyError:
+            return HTTP_ERRORS.KEY_ERROR
+        except User.DoesNotExist:
+            return HTTP_ERRORS.OBJECT_NOT_FOUND
+        except:
+            return HTTP_ERRORS.INTERNAL_ERROR
 
     @action(detail=True, methods=['get'])
-    def get_participants(self, request: Request, event_id: int):
+    def get_participants(self, request: Request, pk: int):
         """
         Get all event participants using event_id
         """
         try:
-            query = Payment.objects.all().get(ID_Event=event_id)
+            query = Payment.objects.all().get(ID_Event=pk)
             serializer = self.serializer_class(query, many=True)
             return Response(serializer.data, status=status.HTTP_200_OK)
         except Payment.DoesNotExist:
@@ -34,11 +49,11 @@ class PaymentViewSet(viewsets.ModelViewSet):
             return HTTP_ERRORS.INTERNAL_ERROR
     
     @action(detail=True, methods=['post'])
-    def add_participants(self, request, event_id: int):
+    def add_participants(self, request, pk: int):
         try:
             new_event = {
                 'ID_User': cache.get('member_id'),
-                'ID_Event': event_id,
+                'ID_Event': pk,
                 'Date': datetime.now(),
                 'Value': request.data['value'],
                 'pay_method': request.data['pay_method']
@@ -101,12 +116,3 @@ class EventViewSet(viewsets.ModelViewSet):
         user.save()
 
         return Response("User " + user.Name + " updated", status=status.HTTP_200_OK)
-    # @action(detail=True, methods=['get'], url_path='watch')
-    # ##
-    # def get_events(request: Request):
-    #     try:
-    #         query = Event.objects.all()
-    #         serializer: EventSerializer = self.serializer_class(query, many=False)
-    #         return Response(serializer.data, status=status.HTTP_200_OK)
-    #     except:
-    #         return Response("Events don't exist", status=status.HTTP_400_BAD_REQUEST)

@@ -4,7 +4,8 @@
     "Escarapela",
     "Noticias",
     "Eventos",
-    "CrearNoticia"
+    "CrearNoticia",
+    "CrearActividad"
   ],
   "gerente": [],
   "operador": [
@@ -17,11 +18,11 @@
     "SignUp",
     "Escarapela",
     "Noticias",
-    "Pago",
     "CrearNoticia",
     "ActualizarNoticia",
     "Eventos",
-    "Crear_evento"
+    "Crear_evento",
+    "CrearActividad"
   ],
   "exact_url": [
     "/"

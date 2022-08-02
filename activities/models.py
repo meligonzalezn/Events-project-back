@@ -9,6 +9,7 @@ class Activity(models.Model):
     Init_hour = models.TimeField()
     Final_hour = models.TimeField()
     Space = models.CharField(max_length=100)
+    Capacity = models.IntegerField(default=100) 
     State = models.CharField(max_length=51)
     Details = models.CharField(max_length=100)
     Title = models.CharField(max_length=100)

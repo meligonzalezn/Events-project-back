@@ -22,7 +22,8 @@
     "ActualizarNoticia",
     "Eventos",
     "Crear_evento",
-    "CrearActividad"
+    "CrearActividad",
+    "Pago"
   ],
   "exact_url": [
     "/"

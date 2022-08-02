@@ -1,8 +1,8 @@
 from rest_framework import serializers
-from .models import Badge
+from .models import Payment
 
 
-class UserSerializer(serializers.ModelSerializer):
+class PaymentSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Badge
+        model = Payment
         fields = ['id', 'ID_User', 'ID_Event', 'Media_file']

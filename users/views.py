@@ -88,14 +88,12 @@ class UserViewSet(viewsets.ModelViewSet):
                 query, many=False)
 
             userData = serializer.data
-            ID_Event = json.loads(request.body)["ID_Event"]
-            # loadImage(userData)
-            # resp = upload("badge.png", public_id="badge_user(" +
-            #               str(pk) + ")_event(" + str(pk) + ")", folder="media/badges_users/")
-            # mediaFile = resp['url']
+            loadImage(userData)
+            resp = upload("badge.png", public_id="badge_user(" +
+                          str(pk) + ")_event(" + str(pk) + ")", folder="media/badges_users/")
+            mediaFile = resp['url']
 
-            # response = {"url": mediaFile}
-            response = {"url": "something"}
+            response = {"url": mediaFile}
             return Response(response, status=status.HTTP_200_OK)
         except:
             return Response("User doesn't exist", status=status.HTTP_400_BAD_REQUEST)

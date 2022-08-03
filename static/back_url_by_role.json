@@ -4,7 +4,7 @@
   ],
   "administrador": [
     "User",
-    "News", 
+    "News",
     "Events"
   ],
   "gerente": [],
@@ -14,6 +14,7 @@
   ],
   "any_user": [
     "login",
-    "loggout"
+    "loggout",
+    "User"
   ]
 }

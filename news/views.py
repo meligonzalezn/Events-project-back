@@ -1,7 +1,4 @@
-from urllib.request import Request
 from rest_framework import viewsets
-
-from static.http_error_response import HTTP_ERRORS
 from .models import News
 from rest_framework.response import Response
 from .serializer import NewsSerializer

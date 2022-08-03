@@ -3,8 +3,8 @@
   "administrador": [
     "Escarapela",
     "Noticias",
-    "Eventos", 
-    "CrearNoticia", 
+    "Eventos",
+    "CrearNoticia",
     "CrearActividad"
   ],
   "gerente": [],
@@ -17,13 +17,13 @@
     "loggout",
     "SignUp",
     "Escarapela",
-    "Noticias", 
-    
-    "CrearNoticia", 
-    "ActualizarNoticia", 
-    "Eventos", 
-    "Crear_evento", 
-    "CrearActividad"
+    "Noticias",
+    "CrearNoticia",
+    "ActualizarNoticia",
+    "Eventos",
+    "Crear_evento",
+    "CrearActividad",
+    "Pago"
   ],
   "exact_url": [
     "/"

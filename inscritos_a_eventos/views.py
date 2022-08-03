@@ -16,7 +16,7 @@ class EnrollViewSet(viewsets.ModelViewSet):
     serializer_class = EnrollSerializer
     queryset = Enroll.objects.all()
 
-    http_method_names = ['get', 'post']
+    http_method_names = ['get', 'post', 'delete']
     
     @action(detail=False, methods=['post'])
     def enroll_user2event(self, request: Request):
@@ -47,3 +47,34 @@ class EnrollViewSet(viewsets.ModelViewSet):
             return HTTP_ERRORS.OBJECT_NOT_FOUND
         except:
             return HTTP_ERRORS.INTERNAL_ERROR
+    
+    @action(detail=True, methods=['get'])
+    def is_user_enrolled2event(self, request: Request, pk: int):
+      """
+      Get event_id and check if actual user is enrolled.
+      """
+      
+      try:
+        query = Enroll.objects.all().get(ID_Event=pk)
+        serializer = self.serializer_class(query, many=False)
+        return HTTP_ERRORS.SuccessfulPetition({"enrolled": True})
+      except Enroll.DoesNotExist:
+        return Response({"enrolled": False})
+      except:
+        return HTTP_ERRORS.INTERNAL_ERROR
+    
+    @action(detail=True, methods=['delete'])
+    def unenrollment(self, request: Request, pk: int):
+      """
+      Remove an user from event
+      """
+      
+      try:
+        query = Enroll.objects.all().get(ID_Event=pk)
+        serializer = self.serializer_class(query, many=False)
+        return HTTP_ERRORS.SuccessfulPetition("Enrollment deleted")
+      except Enroll.DoesNotExist:
+        return HTTP_ERRORS.OBJECT_NOT_FOUND
+      # except:
+      #   return HTTP_ERRORS.INTERNAL_ERROR
+        

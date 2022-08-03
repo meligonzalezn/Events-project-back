@@ -2,12 +2,9 @@ from django.urls import path, include
 from rest_framework import routers
 from .views import EnrollViewSet
 
+router = routers.DefaultRouter()
+router.register(r'', EnrollViewSet)
 
 urlpatterns = [
-    path('',
-         EnrollViewSet.as_view({
-             'get': 'get_participants',
-             'post': 'enroll_user2event',
-         })
-        ),
+    path('', include(router.urls))
 ]

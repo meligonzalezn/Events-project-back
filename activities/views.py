@@ -26,6 +26,8 @@ class ActivityViewSet(viewsets.ModelViewSet):
                 activity.Space = request.data['Space'] 
             if('Capacity' in request.data):
                 activity.Capacity = request.data['Capacity']
+            if('Cost' in request.data):
+                activity.Cost = request.data['Cost']
             if('State' in request.data):
                 activity.State = request.data['State']      
             if('Details' in request.data):

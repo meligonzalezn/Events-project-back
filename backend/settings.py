@@ -171,3 +171,5 @@ CLOUDINARY_STORAGE = {
     'API_SECRET': os.getenv('CLOUDINARY_API_SECRET'),
     'SECURE': True,
 }
+
+STATIC_ROOT = os.path.join(BASE_DIR, "static")

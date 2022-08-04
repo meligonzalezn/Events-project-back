@@ -1,7 +1,6 @@
 from django.db import models
 from users.models import User
 from events.models import Event
-from activities.models import Activity
 
 
 class Enroll(models.Model):

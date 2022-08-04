@@ -40,7 +40,7 @@ INSTALLED_APPS = [
     'news',
     'login',
     'payment',
-    'inscritos_a_eventos',
+    'enrolled_events',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',

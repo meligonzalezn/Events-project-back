@@ -70,8 +70,8 @@ class EnrollViewSet(viewsets.ModelViewSet):
       """
       
       try:
-        query = Enroll.objects.all().get(ID_Event=pk)
-        serializer = self.serializer_class(query, many=False)
+        Enroll.objects.all().filter(ID_Event=pk).delete()
+        
         return HTTP_ERRORS.SuccessfulPetition("Enrollment deleted")
       except Enroll.DoesNotExist:
         return HTTP_ERRORS.OBJECT_NOT_FOUND

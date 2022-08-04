@@ -1,3 +1,5 @@
+from datetime import datetime
+from sqlite3 import Date
 from urllib.request import Request
 from rest_framework import viewsets
 from .serializer import EventSerializer
@@ -5,9 +7,8 @@ from .models import Event
 from rest_framework.decorators import action
 from rest_framework.response import Response
 from rest_framework import status
-
-
-
+from static.http_error_response import HTTP_ERRORS
+from django.core.cache import cache
 
 class EventViewSet(viewsets.ModelViewSet):
     serializer_class = EventSerializer
@@ -39,14 +40,3 @@ class EventViewSet(viewsets.ModelViewSet):
             return Response("Event " + event.Title + " updated", status=status.HTTP_200_OK)
         except:
             return Response("Error", status.HTTP_500_INTERNAL_SERVER_ERROR)
-    
-
-
-
-
-
-
-
-
-
-

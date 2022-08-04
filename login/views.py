@@ -60,8 +60,8 @@ class LoginViewSet(viewsets.ViewSet):
         try:
             user = self.queryset.get(Email=request.data['Email'])
             if user.check_password(request.data['Password']):
-                cache.set('member_id', user.id)
-                cache.set('Role', user.Role)
+                cache.set('member_id', user.id, 1200000)
+                cache.set('Role', user.Role, 1200000)
                 return Response("You're logged in.", status=status.HTTP_200_OK)
             else:
                 return Response("Your username and password didn't match.", status=status.HTTP_406_NOT_ACCEPTABLE)

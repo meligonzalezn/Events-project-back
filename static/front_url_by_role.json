@@ -5,7 +5,8 @@
     "Noticias",
     "Eventos",
     "CrearNoticia",
-    "CrearActividad"
+    "CrearActividad",
+    "ParticipantesActividad"
   ],
   "gerente": [],
   "operador": [
@@ -24,6 +25,7 @@
     "Crear_evento",
     "CrearActividad",
     "Pago",
+    "ParticipantesActividad",
     "Usuarios"
   ],
   "exact_url": [

@@ -83,7 +83,7 @@ class UserViewSet(viewsets.ModelViewSet):
     @action(detail=True, methods=['post'])
     def get_badge(this, request: Request, pk: int) -> Response:
         """
-          For user with ID_User=userId and ID_Event=eventId generate his/her own custom badge.
+          For user with ID_User=userId generate his/her own custom badge.
         """
 
         try:
@@ -112,3 +112,17 @@ class UserViewSet(viewsets.ModelViewSet):
         if(user_id is None):
             return HTTP_ERRORS.OBJECT_NOT_FOUND
         return Response(user_id, status = status.HTTP_200_OK)
+
+    @action(detail=True, methods=['post'])
+    def check_email(this, request: Request, pk) -> Response:
+        """
+        Check if the email given in request.body has been already used.
+        """
+
+        try:
+            data = json.loads(request.body)
+            email = str(data["Email"])
+            query = User.objects.get(Email=email)
+            return Response("Email already in use", status=status.HTTP_200_OK)
+        except:
+            return Response("Email not used", status=status.HTTP_200_OK)

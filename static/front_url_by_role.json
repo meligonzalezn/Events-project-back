@@ -23,7 +23,8 @@
     "Eventos",
     "Crear_evento",
     "CrearActividad",
-    "Pago"
+    "Pago",
+    "Usuarios"
   ],
   "exact_url": [
     "/"

@@ -80,7 +80,7 @@ class UserViewSet(viewsets.ModelViewSet):
         except:
             return Response("Unexpected error", status.HTTP_500_INTERNAL_SERVER_ERROR)
 
-    @action(detail=True, methods=['post'])
+    @action(detail=True, methods=['get'])
     def get_badge(this, request: Request, pk: int) -> Response:
         """
           For user with ID_User=userId generate his/her own custom badge.
@@ -101,17 +101,17 @@ class UserViewSet(viewsets.ModelViewSet):
             return Response(response, status=status.HTTP_200_OK)
         except:
             return Response("User doesn't exist", status=status.HTTP_400_BAD_REQUEST)
-    
+
     @action(detail=False, methods=['get'], url_path="get_id")
-    def get_id(this, request:Request) -> Response:
+    def get_id(this, request: Request) -> Response:
         """
             Return user id saved on cache
         """
-        
+
         user_id = cache.get('member_id')
         if(user_id is None):
             return HTTP_ERRORS.OBJECT_NOT_FOUND
-        return Response(user_id, status = status.HTTP_200_OK)
+        return Response(user_id, status=status.HTTP_200_OK)
 
     @action(detail=True, methods=['post'])
     def check_email(this, request: Request, pk) -> Response:

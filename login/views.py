@@ -9,7 +9,6 @@ from rest_framework.response import Response
 from rest_framework import status
 from users.models import User
 from users.user_functions import UserFunctions
-from users.views import UserViewSet
 
 # Create your views here.
 
@@ -29,9 +28,7 @@ class LoginViewSet(viewsets.ViewSet):
         """
 
         try:
-            query = User.objects.get(Email=request.data['Email'])
-            user: UserSerializer = UserViewSet.serializer_class(
-                query, many=False)
+            user: User = self.queryset.get(Email=request.data['Email'])
             if user.check_password(request.data['Password']):
                 return Response({
                     "id": str(user.id),

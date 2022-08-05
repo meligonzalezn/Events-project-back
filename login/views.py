@@ -9,6 +9,7 @@ from rest_framework.response import Response
 from rest_framework import status
 from users.models import User
 from users.user_functions import UserFunctions
+from users.views import UserViewSet
 
 # Create your views here.
 
@@ -28,7 +29,9 @@ class LoginViewSet(viewsets.ViewSet):
         """
 
         try:
-            user: User = self.queryset.get(Email=request.data['Email'])
+            query = User.objects.get(Email=request.data['Email'])
+            user: UserSerializer = UserViewSet.serializer_class(
+                query, many=False)
             if user.check_password(request.data['Password']):
                 return Response({
                     "id": str(user.id),
@@ -36,7 +39,7 @@ class LoginViewSet(viewsets.ViewSet):
                     "Role": user.Role,
                     "State": user.State,
                     "Media_file": user.Media_file
-                    }, status=status.HTTP_200_OK)
+                }, status=status.HTTP_200_OK)
             else:
                 return Response("Your username and password didn't match.", status=status.HTTP_406_NOT_ACCEPTABLE)
         except User.DoesNotExist:

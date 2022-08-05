@@ -51,14 +51,14 @@ class EnrollViewSet(viewsets.ModelViewSet):
         except:
             return HTTP_ERRORS.INTERNAL_ERROR
 
-    @action(detail=True, methods=['get'])
-    def is_user_enrolled2event(self, request: Request, pk: int):
+    @action(detail=True, methods=['post'])
+    def is_user_enrolled2event(self, request: Request):
         """
         Get event_id and check if actual user is enrolled.
         """
 
         try:
-            query = Enroll.objects.all().get(ID_Event=pk)
+            query = Enroll.objects.all().get(ID_Event=request.data['eventId'], ID_User=request.data['userId'])
             serializer = self.serializer_class(query, many=False)
             return HTTP_ERRORS.SuccessfulPetition({"enrolled": True})
         except Enroll.DoesNotExist:
@@ -66,14 +66,14 @@ class EnrollViewSet(viewsets.ModelViewSet):
         except:
             return HTTP_ERRORS.INTERNAL_ERROR
 
-    @action(detail=True, methods=['delete'])
-    def unenrollment(self, request: Request, pk: int):
+    @action(detail=True, methods=['post'])
+    def unenrollment(self, request: Request):
         """
         Remove an user from event
         """
 
         try:
-            Enroll.objects.all().filter(ID_Event=pk).delete()
+            Enroll.objects.all().filter(ID_Event=request.data['eventId'], ID_User=request.data['userId']).delete()
 
             return HTTP_ERRORS.SuccessfulPetition("Enrollment deleted")
         except Enroll.DoesNotExist:

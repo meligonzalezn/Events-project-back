@@ -85,8 +85,9 @@ class UserViewSet(viewsets.ModelViewSet):
         """
           For user with ID_User=userId generate his/her own custom badge.
         """
-
+        daResponse = ""
         try:
+            daResponse += " TEST " + str(pk)
             query = User.objects.get(id=pk)
             serializer: UserSerializer = UserViewSet.serializer_class(
                 query, many=False)
@@ -100,7 +101,7 @@ class UserViewSet(viewsets.ModelViewSet):
             response = {"url": mediaFile}
             return Response(response, status=status.HTTP_200_OK)
         except:
-            return Response("User doesn't exist", status=status.HTTP_400_BAD_REQUEST)
+            return Response(daResponse, status=status.HTTP_400_BAD_REQUEST)
 
     @action(detail=False, methods=['get'], url_path="get_id")
     def get_id(this, request: Request) -> Response:

@@ -58,6 +58,8 @@ class UserViewSet(viewsets.ModelViewSet):
                 user.Phone = request.data['Phone']
             if('Password' in request.data):
                 user.Password = request.data['Password']
+            if('Media_file' in request.data):
+                user.Media_file = request.data['Media_file']
             user.save()
 
             return Response("User " + user.Name + " updated", status=status.HTTP_200_OK)

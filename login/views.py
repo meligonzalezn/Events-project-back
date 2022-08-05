@@ -2,7 +2,6 @@ from django.shortcuts import render
 from urllib.request import Request
 from django.http import HttpResponse
 from rest_framework import viewsets
-from .loggin_functions import is_logged
 from users.serializer import UserSerializer
 from rest_framework.decorators import action
 from rest_framework.response import Response

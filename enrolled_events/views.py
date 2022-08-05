@@ -7,7 +7,6 @@ from rest_framework import status
 from .models import Enroll
 from .serializer import EnrollSerializer
 from static.http_error_response import HTTP_ERRORS
-from django.core.cache import cache
 
 from events.models import Event
 from users.models import User
@@ -24,7 +23,7 @@ class EnrollViewSet(viewsets.ModelViewSet):
     @action(detail=False, methods=['post'])
     def enroll_user2event(self, request: Request):
         try:
-            userId = cache.get('member_id')
+            userId = request.data['member_id']
             eventId = request.data["event_id"]
             user = User.objects.get(id=userId)
             event = Event.objects.get(id=eventId)

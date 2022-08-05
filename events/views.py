@@ -8,7 +8,6 @@ from rest_framework.decorators import action
 from rest_framework.response import Response
 from rest_framework import status
 from static.http_error_response import HTTP_ERRORS
-from django.core.cache import cache
 
 class EventViewSet(viewsets.ModelViewSet):
     model = Event

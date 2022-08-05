@@ -86,7 +86,6 @@ class UserViewSet(viewsets.ModelViewSet):
         """
           For user with ID_User=userId generate his/her own custom badge.
         """
-        daResponse = ""
         try:
             query = User.objects.get(id=pk)
             serializer: UserSerializer = UserViewSet.serializer_class(
@@ -94,16 +93,14 @@ class UserViewSet(viewsets.ModelViewSet):
 
             userData = serializer.data
             loadImage(userData)
-            daResponse = os.getenv('CLOUDINARY_CLOUD_NAME')
             resp = upload("./users/badge.png", public_id="badge_user(" +
                           str(pk) + ")_event(" + str(pk) + ")", folder="media/badges_users/")
-            daResponse += "Uploaded to cloudinary"
             mediaFile = resp['url']
 
             response = {"url": mediaFile}
             return Response(response, status=status.HTTP_200_OK)
         except Exception as e:
-            return Response(daResponse, status=status.HTTP_400_BAD_REQUEST)
+            return Response("User does not exists", status=status.HTTP_400_BAD_REQUEST)
 
     @action(detail=False, methods=['get'], url_path="get_id")
     def get_id(this, request: Request) -> Response:

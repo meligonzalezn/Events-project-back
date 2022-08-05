@@ -51,25 +51,17 @@ class LoginViewSet(viewsets.ViewSet):
             loggin function. HTTP_200 if it is loggin or could logging.
             Otherwise, HTTP_406
         """
-        daResponse = ""
 
-        if(cache.get('member_id') is not None):
-            return Response("You're logged in. ", status=status.HTTP_200_OK)
-
-        daResponse += "cache   "
         try:
             user = self.queryset.get(Email=request.data['Email'])
-            daResponse += "Data could not be obtained"
             if user.check_password(request.data['Password']):
-                cache.set('member_id', user.id, 1200000)
-                cache.set('Role', user.Role, 1200000)
                 return Response("You're logged in.", status=status.HTTP_200_OK)
             else:
                 return Response("Your username and password didn't match.", status=status.HTTP_406_NOT_ACCEPTABLE)
         except User.DoesNotExist:
             return Response("Your username and password didn't match.", status=status.HTTP_406_NOT_ACCEPTABLE)
         except:
-            return Response("Internal server Error" + daResponse, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+            return Response("Internal server Error", status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
     @action(detail=False, methods=['delete'])
     def delete(self, request: Request):

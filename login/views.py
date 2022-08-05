@@ -36,7 +36,7 @@ class LoginViewSet(viewsets.ViewSet):
                     "Role": user.Role,
                     "State": user.State,
                     "Media_file": user.Media_file
-                    }, status=status.HTTP_200_OK)
+                }, status=status.HTTP_200_OK)
             else:
                 return Response("Your username and password didn't match.", status=status.HTTP_406_NOT_ACCEPTABLE)
         except User.DoesNotExist:

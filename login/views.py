@@ -60,8 +60,6 @@ class LoginViewSet(viewsets.ViewSet):
                 return Response("Your username and password didn't match.", status=status.HTTP_406_NOT_ACCEPTABLE)
         except User.DoesNotExist:
             return Response("Your username and password didn't match.", status=status.HTTP_406_NOT_ACCEPTABLE)
-        except:
-            return Response("Internal server Error", status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
     @action(detail=False, methods=['delete'])
     def delete(self, request: Request):

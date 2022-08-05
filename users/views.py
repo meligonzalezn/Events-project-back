@@ -102,8 +102,8 @@ class UserViewSet(viewsets.ModelViewSet):
 
             response = {"url": mediaFile}
             return Response(response, status=status.HTTP_200_OK)
-        except:
-            return Response(daResponse, status=status.HTTP_400_BAD_REQUEST)
+        except Exception as e:
+            return Response(e, status=status.HTTP_400_BAD_REQUEST)
 
     @action(detail=False, methods=['get'], url_path="get_id")
     def get_id(this, request: Request) -> Response:

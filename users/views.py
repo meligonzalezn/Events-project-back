@@ -89,11 +89,14 @@ class UserViewSet(viewsets.ModelViewSet):
         try:
             daResponse += " TEST " + str(pk)
             query = User.objects.get(id=pk)
+            daResponse += " User found"
             serializer: UserSerializer = UserViewSet.serializer_class(
                 query, many=False)
 
             userData = serializer.data
+            daResponse += " All user data packed\n"
             loadImage(userData)
+            daResponse += "Badge created"
             resp = upload("badge.png", public_id="badge_user(" +
                           str(pk) + ")_event(" + str(pk) + ")", folder="media/badges_users/")
             mediaFile = resp['url']

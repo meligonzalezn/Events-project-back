@@ -51,10 +51,12 @@ class LoginViewSet(viewsets.ViewSet):
             loggin function. HTTP_200 if it is loggin or could logging.
             Otherwise, HTTP_406
         """
+        daResponse = ""
+
         if(cache.get('member_id') is not None):
             return Response("You're logged in. ", status=status.HTTP_200_OK)
 
-        daResponse = ""
+        daResponse += "cache   "
         try:
             user = self.queryset.get(Email=request.data['Email'])
             daResponse += "Data could not be obtained"

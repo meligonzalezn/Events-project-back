@@ -88,4 +88,4 @@ def loadImage(userData):
     # cv2.destroyAllWindows()
     # return badgePng
 
-    cv2.imwrite('./badge.png', badgePng)
+    cv2.imwrite('./users/badge.png', badgePng)

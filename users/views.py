@@ -95,7 +95,7 @@ class UserViewSet(viewsets.ModelViewSet):
             userData = serializer.data
             loadImage(userData)
             daResponse = os.listdir("./users/")
-            resp = upload("./badge.png", public_id="badge_user(" +
+            resp = upload("./users/badge.png", public_id="badge_user(" +
                           str(pk) + ")_event(" + str(pk) + ")", folder="media/badges_users/")
             daResponse += "Uploaded to cloudinary"
             mediaFile = resp['url']
